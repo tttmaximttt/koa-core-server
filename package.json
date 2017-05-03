@@ -1,5 +1,5 @@
 {
-  "name": "koatest",
+  "name": "koa-core",
   "version": "1.0.1",
   "description": "",
   "main": "index.js",
@@ -17,9 +17,10 @@
     "babel-preset-env": "^1.4.0"
   },
   "scripts": {
+    "prepublish": "npm run build",
     "build": "babel -d lib/ src/ --source-maps --copy-files",
     "server": "nodemon --exec babel-node src"
   },
-  "author": "",
+  "author": "Maksym Radko",
   "license": "ISC"
 }
