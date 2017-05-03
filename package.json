@@ -1,0 +1,25 @@
+{
+  "name": "koatest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "glob": "^7.1.1",
+    "koa": "^2.2.0",
+    "koa-logger": "^2.0.1",
+    "koa-router": "^7.1.1",
+    "nodemon": "^1.11.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-preset-env": "^1.4.0"
+  },
+  "scripts": {
+    "build": "babel -d lib/ src/ --source-maps --copy-files",
+    "server": "nodemon --exec babel-node src"
+  },
+  "author": "",
+  "license": "ISC"
+}
