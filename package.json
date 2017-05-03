@@ -1,6 +1,6 @@
 {
   "name": "koa-core-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "dependencies": {
@@ -11,12 +11,17 @@
     "koa-router": "^7.1.1",
     "nodemon": "^1.11.0"
   },
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "https://github.com/tttmaximttt/koa-core-server.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tttmaximttt/koa-core-server.git"
   },
-  "keywords": ["koa", "koa-core", "koa-server", "server-core", "koa-core-server"],
+  "keywords": [
+    "koa",
+    "koa-core",
+    "koa-server",
+    "server-core",
+    "koa-core-server"
+  ],
   "homepage": "https://github.com/tttmaximttt/koa-core-server",
   "devDependencies": {
     "babel-cli": "^6.24.1",
