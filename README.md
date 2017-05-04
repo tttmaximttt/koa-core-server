@@ -59,3 +59,7 @@ export default class HelloController {
 ```
 [server example](https://github.com/tttmaximttt/koa-core-server/tree/master/example)
 -----------
+
+# TODO
+* add data access loader and injector
+* add load packages from yarn
