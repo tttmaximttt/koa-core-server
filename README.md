@@ -61,5 +61,6 @@ export default class HelloController {
 -----------
 
 # TODO
-* add data access loader and injector
 * add load packages from yarn
+* fix duplicate logic in loaders
+* add only read preferences to injectors 

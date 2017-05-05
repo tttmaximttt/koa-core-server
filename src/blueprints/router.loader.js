@@ -6,9 +6,9 @@ export default class RouteLoader {
     return filaneme.split('.')[0];
   }
 
-  constructor(routeDir, controllerInjector) {
+  constructor(routeDir, injector) {
     this.routeDir = routeDir;
-    this.controllerInjector = controllerInjector;
+    this.injector = injector;
     this.routeInstance = null;
     this.stack = [];
   }
@@ -28,7 +28,7 @@ export default class RouteLoader {
     const routFiles = glob.sync(`${this.routeDir}/**/*.router.js`);
     for (const file of routFiles) {
       const RouteClass = require(file).default;
-      RouteClass.prototype.injector = this.controllerInjector;
+      RouteClass.prototype.injector = this.injector;
       const fileName = path.basename(file);
       this.routeInstance = new RouteClass();
       this._bindRoutes(fileName);

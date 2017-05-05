@@ -1,4 +1,4 @@
-export default class ControllerInjector extends Map {
+export default class Injector extends Map {
 
   constructor() {
     super();

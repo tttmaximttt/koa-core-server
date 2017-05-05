@@ -7,8 +7,9 @@ export default class ControllerLoader {
     return `${splitName[0]}${splitName[1].charAt(0).toUpperCase() + splitName[1].slice(1)}`
   }
 
-  constructor(controllersDirPath) {
+  constructor(controllersDirPath, dataAccessInjector) {
     this.controllersDirPath = controllersDirPath;
+    this.injector = dataAccessInjector;
   }
 
   load(injector) {
@@ -16,6 +17,7 @@ export default class ControllerLoader {
 
     for (const file of controllerFiles) {
       const ControllerClass = require(file).default;
+      ControllerClass.prototype.injector = this.injector;
       const fileName = `${path.basename(file)}Controller`;
       const controllerInstance = new ControllerClass();
       const controllerName = controllerInstance.name || ControllerLoader._getControllerName(fileName);

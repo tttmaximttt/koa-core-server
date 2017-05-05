@@ -9,7 +9,7 @@ export default class UserRouter extends Router {
   }
 
   load() {
-    this.get('/', this.userController.sayHello.bind(this.userController)); // TODO fix binding
+    this.get('/hello', this.userController.sayHello.bind(this.userController)); // TODO fix binding
     this.get('/by', this.userController.sayBy.bind(this.userController)); // TODO fix binding
     return this;
   }
