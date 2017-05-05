@@ -64,3 +64,5 @@ export default class HelloController {
 * add load packages from yarn
 * fix duplicate logic in loaders
 * add only read preferences to injectors 
+* add tests
+* add auto publish via some CI by master hook
