@@ -16,7 +16,7 @@ export default class DataAccessLoader {
     const controllerFiles = glob.sync(`${this.controllersDirPath}/**/*.dataAccess.js`);
 
     for (const file of controllerFiles) {
-      const DataAccessClass = require(file).default;
+      const DataAccessClass = require(file);
       const fileName = `${path.basename(file)}`;
       console.log(fileName);
       const controllerInstance = new DataAccessClass();

@@ -27,7 +27,7 @@ export default class RouteLoader {
   load() {
     const routFiles = glob.sync(`${this.routeDir}/**/*.router.js`);
     for (const file of routFiles) {
-      const RouteClass = require(file).default;
+      const RouteClass = require(file);
       RouteClass.prototype.injector = this.injector;
       const fileName = path.basename(file);
       this.routeInstance = new RouteClass();
