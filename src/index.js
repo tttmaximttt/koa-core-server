@@ -13,7 +13,7 @@ export default class Server extends Koa {
     this.use(logger());
     this.controllerInjector = new Injector();
     this.dataAccessInjector = new Injector();
-    this.port = process.env['PORT'];
+    this.port = process.env['PORT'] || 3000;
   }
 
   init() {
