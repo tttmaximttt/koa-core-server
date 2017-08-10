@@ -13,6 +13,7 @@ export default class Server extends Koa {
     this.use(logger());
     this.controllerInjector = new Injector();
     this.dataAccessInjector = new Injector();
+    this.port = process.env['PORT'];
   }
 
   init() {
@@ -26,8 +27,8 @@ export default class Server extends Koa {
 
   start() {
     this.init();
-    this.listen(3000, () => {
-      console.log('listening at 3000');
+    this.listen(this.port, () => {
+      console.log(`listening at ${this.port}`);
     });
   }
 
