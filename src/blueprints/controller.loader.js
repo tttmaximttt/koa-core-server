@@ -16,7 +16,12 @@ export default class ControllerLoader {
     const controllerFiles = glob.sync(`${this.controllersDirPath}/**/*.controller.js`);
 
     for (const file of controllerFiles) {
-      const ControllerClass = require(file);
+      let ControllerClass = require(file);
+
+      if (ControllerClass.default) {
+        ControllerClass = ControllerClass.default;
+      }
+
       ControllerClass.prototype.injector = this.injector;
       const fileName = `${path.basename(file)}Controller`;
       const controllerInstance = new ControllerClass();

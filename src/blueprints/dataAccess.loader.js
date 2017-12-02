@@ -16,9 +16,13 @@ export default class DataAccessLoader {
     const controllerFiles = glob.sync(`${this.controllersDirPath}/**/*.dataAccess.js`);
 
     for (const file of controllerFiles) {
-      const DataAccessClass = require(file);
+      let DataAccessClass = require(file);
       const fileName = `${path.basename(file)}`;
-      console.log(fileName);
+
+      if (DataAccessClass.default) {
+        DataAccessClass = DataAccessClass.default;
+      }
+
       const controllerInstance = new DataAccessClass();
       const dataAccessName = controllerInstance.name || DataAccessLoader._getControllerName(fileName);
       console.log(`Data access "${dataAccessName}" load successful`);
