@@ -1,4 +1,4 @@
-import Server from '../src'; // Path to koa-core in node_modules
+import Server from 'koa-core-server'; // Path to koa-core in node_modules
 import path from 'path';
 
 const routePath = path.join(__dirname, 'routers');

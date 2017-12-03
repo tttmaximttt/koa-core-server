@@ -1,5 +1,5 @@
 # KOA-CORE-SERVER
-The koa server wrapper.
+The koa server wrapper. That's all what you need to start build koa based server.
 ---
 
 ### SETUP
@@ -8,12 +8,12 @@ The koa server wrapper.
 ### HOW TO USE
 * server initialization
 ```javascript
-import Server from 'Path to koa-core in node_modules';
+import Server from 'koa-core-server';
 import path from 'path';
 
-const routePath = path.join(__dirname, 'routers');
-const controllersPath = path.join(__dirname, 'controllers');
-const dataAccessPath = path.join(__dirname, 'dataAccess');
+const routePath = path.join(__dirname, 'routers'); // dir where you routers live
+const controllersPath = path.join(__dirname, 'controllers'); // dir where you controllers live
+const dataAccessPath = path.join(__dirname, 'dataAccess'); // dir where you data access live
 const server = new Server({
   routePath,
   controllersPath,
@@ -31,14 +31,15 @@ export default class HelloRouter extends Router {
   constructor() {
     super();
     this.name = 'Hello router';  // optional if not define will be used file name"
-    this.rootPath = null; // optional by default will be using first part of the file name
-    this.helloController = this.injector.get('helloCustomName');
+    this.rootPath = null; // optional by default will be using first part of the file name `hello.router -> /hello`
+    this.helloController = this.injector.get('helloCustomName'); // get controller from injector controller name defining in controller class via 
+    //  `this.name` or if not define use controller file name with postfix in camel case notation `user.controller -> userController`
   }
 
   load() {
-    this.get('/', this.helloController.getHello.bind(this.helloController)); // TODO fix binding
-    this.get('/by', this.helloController.sayBy.bind(this.helloController)); // TODO fix binding
-    return this;
+    this.get('/', this.helloController.getHello.bind(this.helloController)); // define you routers here
+    this.get('/by', this.helloController.sayBy.bind(this.helloController)); // define you routers here
+    return this; // return this is required in `this` lives you routers
   }
 };
 ```
@@ -47,16 +48,16 @@ export default class HelloRouter extends Router {
 ```javascript
 export default class HelloController {
   constructor() {
-    this.name = 'helloCustomName'; // optional if not define will be using file name in "helloController" format
-    this.injector = HelloController.prototype.injector;
-    this.helloDataAccess = this.injector.get('helloDataAccess');
+    this.name = 'helloCustomName'; // controller name will be set in controller injector and you can find controller by this name in injector or use 
+    // controller file name with postfix in camel case notation `user.controller -> userController`
+    this.helloDataAccess = this.injector.get('helloDataAccess'); // get  you data access for this controller by name defining in data access class `this.name` or use file name in camel case notation with postfix `hello.dataAccess -> helloDataAccess` 
   }
 
-  async getHello(ctx, next) {
+  async getHello(ctx, next) { // controller methods uses in routers should be defined like plain koa function with async and ctx and next like parameters
     ctx.response.body = await this.helloDataAccess.getHello();
   }
 
-  async sayBy(ctx, next) {
+  async sayBy(ctx, next) { // controller methods uses in routers should be defined like plain koa function with async and ctx and next like parameters
     ctx.response.body = await this.helloDataAccess.getGoodBy();
   }
 }
@@ -66,16 +67,16 @@ export default class HelloController {
 * dataAccess
 ```javascript
 export default class HelloDataAccess {
-  getHello() {
+  getHello() { // this methods will be using in controller
     return Promise.resolve('hello');
   }
 
-  getGoodBy() {
+  getGoodBy() { // this methods will be using in controller
     return Promise.resolve('good by');
   }
 }
 ```
-[server example](https://github.com/tttmaximttt/koa-core-server/tree/master/example)
+ For more detailed example look at [server example](https://github.com/tttmaximttt/koa-core-server/tree/master/example)
 -----------
 
 # TODO
