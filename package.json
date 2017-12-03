@@ -5,12 +5,15 @@
   "main": "index.js",
   "dependencies": {
     "bluebird": "^3.5.0",
+    "chai": "^4.1.2",
     "glob": "^7.1.1",
     "koa": "^2.4.1",
     "koa-logger": "^2.0.1",
     "koa-router": "^7.3.0",
     "lodash": "^4.17.4",
-    "nodemon": "^1.11.0"
+    "mocha": "^4.0.1",
+    "nodemon": "^1.11.0",
+    "sinon": "^4.1.2"
   },
   "repository": {
     "type": "git",
@@ -35,7 +38,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "NODE_ENV=production babel -d lib/ src/ --source-maps --copy-files",
-    "server": "nodemon --exec babel-node src"
+    "test": "mocha --require babel-register"
   },
   "author": "Maksym Radko",
   "license": "ISC"

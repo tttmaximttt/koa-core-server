@@ -7,6 +7,7 @@ import DataAccessLoader from './loaders/dataAccess.loader';
 import Injector from './blueprints/injector';
 import cluster from 'cluster';
 import os from 'os';
+import _ from 'lodash';
 
 export default class Server extends Koa {
   constructor(options = {}) {
@@ -63,17 +64,35 @@ export default class Server extends Koa {
   }
 
   _loadDataAccess() {
-    const dataAccessLoader = new DataAccessLoader(path.resolve(this.options.dataAccessPath));
+    const { dataAccessPath } = this.options;
+
+    if (!_.isString(dataAccessPath)) {
+      throw new Error('Should be provided path to you data access dir.');
+    }
+
+    const dataAccessLoader = new DataAccessLoader(path.resolve(dataAccessPath));
     return dataAccessLoader.load(new Injector());
   }
 
   _loadControllers(dataAccessInjector) {
-    const controllerLoader = new ControllerLoader(path.resolve(this.options.controllersPath), dataAccessInjector);
+    const { controllersPath } = this.options;
+
+    if (!_.isString(controllersPath)) {
+      throw new Error('Should be provided path to you controllers dir.');
+    }
+
+    const controllerLoader = new ControllerLoader(path.resolve(controllersPath), dataAccessInjector);
     return controllerLoader.load(new Injector());
   }
 
   _loadRoutes(controllerInjector) {
-    const routeLoader = new RouterLoader(path.resolve(this.options.routePath), controllerInjector);
+    const { routePath } = this.options;
+
+    if (!_.isString(routePath)) {
+      throw new Error('Should be provided path to you routes dir.');
+    }
+
+    const routeLoader = new RouterLoader(path.resolve(routePath), controllerInjector);
     const routers = routeLoader.load();
     routers.forEach((router) => {
       this.use(router);

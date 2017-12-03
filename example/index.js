@@ -1,4 +1,4 @@
-const Server = require('../index'); // Path to koa-core in node_modules
+const Server = require('koa-core-server'); // Path to koa-core in node_modules
 const path = require('path');
 
 const routePath = path.join(__dirname, 'routers');
@@ -8,8 +8,8 @@ const server = new Server({
   routePath,
   controllersPath,
   dataAccessPath,
-  clustering: false,
-  loadersStatus: true,
+  clustering: true,
+  loadersStatus: false,
 });
 
 server.use((ctx, next) => {

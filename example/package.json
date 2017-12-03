@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "koa-core-server": "^1.1.1"
+    "koa-core-server": "*"
   }
 }
