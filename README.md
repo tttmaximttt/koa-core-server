@@ -8,7 +8,7 @@ The koa server wrapper.
 ### HOW TO USE
 * server initialization
 ```javascript
-import Server from '../src'; // Path to koa-core in node_modules
+import Server from 'Path to koa-core in node_modules';
 import path from 'path';
 
 const routePath = path.join(__dirname, 'routers');
@@ -80,7 +80,6 @@ export default class HelloDataAccess {
 
 # TODO
 * add load packages from yarn
-* fix duplicate logic in loaders
 * add only read preferences to injectors 
 * add tests
 * add auto publish via some CI by master hook
