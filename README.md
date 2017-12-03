@@ -18,6 +18,8 @@ const server = new Server({
   routePath,
   controllersPath,
   dataAccessPath,
+  clustering: {bool}, // by default is false, run you app with workers
+  loadersStatus: {bool}, // by default false, show loader statuses
 });
 
 server.use((ctx, next) => { // that how you can connect you middleware

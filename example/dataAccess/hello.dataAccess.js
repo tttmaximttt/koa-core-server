@@ -1,9 +1,9 @@
 module.exports = class HelloDataAccess {
   getHello() {
-    return Promise.resolve('hello');
+    return Promise.resolve('hellos');
   }
 
   getGoodBy() {
-    return Promise.resolve('good by');
+    return Promise.resolve('good bydd');
   }
 };

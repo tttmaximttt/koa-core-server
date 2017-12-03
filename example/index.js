@@ -8,6 +8,8 @@ const server = new Server({
   routePath,
   controllersPath,
   dataAccessPath,
+  clustering: false,
+  loadersStatus: true,
 });
 
 server.use((ctx, next) => {

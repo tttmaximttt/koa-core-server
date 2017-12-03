@@ -2,6 +2,7 @@ import glob from 'glob';
 import _ from 'lodash';
 import path from 'path';
 
+const env = process.env.NODE_ENV || 'development';
 export default class Loader {
   static _getName(rawName) {
     const splitName = rawName.split('.');
@@ -20,6 +21,11 @@ export default class Loader {
     }
 
     const files = glob.sync(`${this.dirPath}/**/*.${this.filePostfix}.js`);
+
+    if (!files.length) {
+      throw new Error(`No ${this.filePostfix} to load`);
+    }
+
     for (const file of files) {
       let ClassFile = require(file);
       const fileName = `${path.basename(file)}`;
@@ -31,8 +37,10 @@ export default class Loader {
       ClassFile.prototype.injector = this.injector;
       const instance = new ClassFile();
       const name = instance.name || Loader._getName(fileName);
-      console.log(`${this.filePostfix} "${name}" load successful`);
+      loadersStatus && console.log(`${this.filePostfix} "${name}" load successful`);
       injector.set(name, instance);
     }
+
+    return injector;
   }
 }
