@@ -1,0 +1,4 @@
+pipeline:
+  backend:
+    commands:
+      - npm run build
