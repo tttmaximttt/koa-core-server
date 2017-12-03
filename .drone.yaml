@@ -1,4 +1,4 @@
 pipeline:
-  backend:
+  build:
     commands:
       - npm run build
