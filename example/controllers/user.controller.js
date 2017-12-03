@@ -1,6 +1,5 @@
 export default class UserController {
   constructor() {
-    this.injector = UserController.prototype.injector;
     this.userData = this.injector.get('userData');
   }
 

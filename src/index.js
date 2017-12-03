@@ -1,9 +1,9 @@
 import Koa from 'koa';
 import path from 'path';
 import logger from 'koa-logger';
-import RouterLoader from './blueprints/router.loader';
-import ControllerLoader from './blueprints/controller.loader';
-import DataAccessLoader from './blueprints/dataAccess.loader';
+import RouterLoader from './loaders/router.loader';
+import ControllerLoader from './loaders/controller.loader';
+import DataAccessLoader from './loaders/dataAccess.loader';
 import Injector from './blueprints/injector';
 
 export default class Server extends Koa {
@@ -18,11 +18,11 @@ export default class Server extends Koa {
 
   init() {
     // DATA ACCESS LOADING
-    this._loadDataAccess();
+    const dataAccessInjector = this._loadDataAccess();
     // CONTROLLER LOADING
-    this._loadControllers();
+    const controllerInjector = this._loadControllers(dataAccessInjector);
     // ROUTE LOADING
-    this._loadRoutes();
+    this._loadRoutes(controllerInjector);
   }
 
   start() {
@@ -33,17 +33,21 @@ export default class Server extends Koa {
   }
 
   _loadDataAccess() {
+    const dataAccessInjector = new Injector();
     const dataAccessLoader = new DataAccessLoader(path.resolve(this.options.dataAccessPath));
-    dataAccessLoader.load(this.dataAccessInjector);
+    dataAccessLoader.load(dataAccessInjector);
+    return dataAccessInjector;
   }
 
-  _loadControllers() {
-    const controllerLoader = new ControllerLoader(path.resolve(this.options.controllersPath), this.dataAccessInjector);
-    controllerLoader.load(this.controllerInjector);
+  _loadControllers(dataAccessInjector) {
+    const controllerInjector = new Injector();
+    const controllerLoader = new ControllerLoader(path.resolve(this.options.controllersPath), dataAccessInjector);
+    controllerLoader.load(controllerInjector);
+    return controllerInjector;
   }
 
-  _loadRoutes() {
-    const routeLoader = new RouterLoader(path.resolve(this.options.routePath), this.controllerInjector);
+  _loadRoutes(controllerInjector) {
+    const routeLoader = new RouterLoader(path.resolve(this.options.routePath), controllerInjector);
     const routers = routeLoader.load();
     routers.forEach((router) => {
       this.use(router);

@@ -8,14 +8,16 @@ The koa server wrapper.
 ### HOW TO USE
 * server initialization
 ```javascript
-import Server from 'koa-core-server';
+import Server from '../src'; // Path to koa-core in node_modules
 import path from 'path';
 
-const routePath = path.join(__dirname, 'routers'); // path to you {name}.route.js
-const controllersPath= path.join(__dirname, 'controllers'); // path to you {name}.controller.js
+const routePath = path.join(__dirname, 'routers');
+const controllersPath = path.join(__dirname, 'controllers');
+const dataAccessPath = path.join(__dirname, 'dataAccess');
 const server = new Server({
   routePath,
   controllersPath,
+  dataAccessPath,
 });
 
 server.start();
@@ -25,7 +27,7 @@ server.start();
 ```javascript
 import Router from 'koa-router';
 
-export default class ExampleRouterClass extends Router {
+export default class HelloRouter extends Router {
   constructor() {
     super();
     this.name = 'Hello router';  // optional if not define will be used file name"
@@ -34,8 +36,8 @@ export default class ExampleRouterClass extends Router {
   }
 
   load() {
-    this.get('/', this.helloController.getHello.bind(this.helloController));
-    this.get('/by', this.helloController.sayBy.bind(this.helloController));
+    this.get('/', this.helloController.getHello.bind(this.helloController)); // TODO fix binding
+    this.get('/by', this.helloController.sayBy.bind(this.helloController)); // TODO fix binding
     return this;
   }
 };
@@ -46,7 +48,7 @@ export default class ExampleRouterClass extends Router {
 export default class HelloController {
   constructor() {
     this.name = 'helloCustomName'; // optional if not define will be using file name in "helloController" format
-    this.injector = HelloController.prototype.injector; // have all dataAccess
+    this.injector = HelloController.prototype.injector;
     this.helloDataAccess = this.injector.get('helloDataAccess');
   }
 
@@ -58,6 +60,7 @@ export default class HelloController {
     ctx.response.body = await this.helloDataAccess.getGoodBy();
   }
 }
+
 ```
 
 * dataAccess

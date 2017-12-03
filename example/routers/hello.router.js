@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 
 export default class HelloRouter extends Router {
-  constructor() {
+  constructor(injector) {
     super();
     this.name = 'Hello router';  // optional if not define will be used file name"
     this.rootPath = null; // optional by default will be using first part of the file name

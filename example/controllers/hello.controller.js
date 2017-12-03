@@ -1,7 +1,6 @@
 export default class HelloController {
   constructor() {
     this.name = 'helloCustomName'; // optional if not define will be using file name in "helloController" format
-    this.injector = HelloController.prototype.injector;
     this.helloDataAccess = this.injector.get('helloDataAccess');
   }
 
