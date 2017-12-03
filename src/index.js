@@ -12,6 +12,10 @@ export default class Server extends Koa {
     this.options = options;
     this.use(logger());
     this.port = process.env['PORT'] || 3000;
+
+    this.on('error', (err, ctx) => {
+      console.error('server error', err, ctx)
+    });
   }
 
   init() {

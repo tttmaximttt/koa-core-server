@@ -8,8 +8,8 @@ The koa server wrapper. That's all what you need to start build koa based server
 ### HOW TO USE
 * server initialization
 ```javascript
-import Server from 'koa-core-server';
-import path from 'path';
+const Server = require('koa-core-server'); // Path to koa-core in node_modules
+const path = require('path');
 
 const routePath = path.join(__dirname, 'routers'); // dir where you routers live
 const controllersPath = path.join(__dirname, 'controllers'); // dir where you controllers live
@@ -20,14 +20,19 @@ const server = new Server({
   dataAccessPath,
 });
 
+server.use((ctx, next) => { // that how you can connect you middleware
+  console.log('hello from middleware');
+  next();
+});
+
 server.start();
 ```
 
 * router
 ```javascript
-import Router from 'koa-router';
+const Router = require('koa-router');
 
-export default class HelloRouter extends Router {
+module.exports = class HelloRouter extends Router {
   constructor() {
     super();
     this.name = 'Hello router';  // optional if not define will be used file name"
@@ -46,7 +51,7 @@ export default class HelloRouter extends Router {
 
 * controller
 ```javascript
-export default class HelloController {
+module.exports = class HelloController {
   constructor() {
     this.name = 'helloCustomName'; // controller name will be set in controller injector and you can find controller by this name in injector or use 
     // controller file name with postfix in camel case notation `user.controller -> userController`
@@ -66,7 +71,7 @@ export default class HelloController {
 
 * dataAccess
 ```javascript
-export default class HelloDataAccess {
+module.exports = class HelloDataAccess {
   getHello() { // this methods will be using in controller
     return Promise.resolve('hello');
   }
