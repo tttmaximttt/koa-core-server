@@ -1,0 +1,6 @@
+pipeline:
+  backend:
+    image: node:8
+    commands:
+      - npm install
+      - ./node_modules/.bin/babel-node example
