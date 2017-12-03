@@ -18,6 +18,8 @@
   },
   "keywords": [
     "koa",
+    "server",
+    "koa-node",
     "koa-core",
     "koa-server",
     "server-core",
