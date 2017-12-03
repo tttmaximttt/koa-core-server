@@ -1,4 +1,4 @@
-export default class UserDataAccess {
+module.exports = class UserDataAccess {
   constructor() {
     this.name = 'userData';
   }
@@ -9,4 +9,4 @@ export default class UserDataAccess {
   getHello(name) {
     return Promise.resolve(`hello from user ${name}`);
   }
-}
+};

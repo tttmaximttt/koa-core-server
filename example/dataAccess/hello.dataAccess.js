@@ -1,4 +1,4 @@
-export default class HelloDataAccess {
+module.exports = class HelloDataAccess {
   getHello() {
     return Promise.resolve('hello');
   }
@@ -6,4 +6,4 @@ export default class HelloDataAccess {
   getGoodBy() {
     return Promise.resolve('good by');
   }
-}
+};

@@ -1,5 +1,5 @@
 {
-  "presets": [["env", {
+  "presets": ["babili", ["env", {
     "targets": {
       "node": true
     }

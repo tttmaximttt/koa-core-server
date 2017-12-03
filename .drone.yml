@@ -1,7 +1,0 @@
-pipeline:
-  build:
-    image: node:8
-    commands:
-      - npm install
-      - node -v
-      - ./node_modules/.bin/babel-node example

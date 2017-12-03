@@ -1,6 +1,6 @@
-import Router from 'koa-router';
+const Router = require('koa-router');
 
-export default class UserRouter extends Router {
+module.exports = class UserRouter extends Router {
   constructor() {
     super();
     this.name = 'User router';  // optional if not define will be used file name"
