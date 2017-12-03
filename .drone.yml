@@ -1,5 +1,5 @@
 pipeline:
-  backend:
+  build:
     image: node:8
     commands:
       - npm install
