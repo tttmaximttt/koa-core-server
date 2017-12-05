@@ -6,6 +6,8 @@ The koa server wrapper. That's all what you need to start build koa based server
 * npm install --save koa-core-server
 
 ### HOW TO USE
+#### Project structure should looks like this.
+![Project structure](./image/example_index_js_-_koa-core-server_-____worckspase_koa-core-server_.png)
 * server initialization
 ```javascript
 const Server = require('koa-core-server'); // Path to koa-core in node_modules
